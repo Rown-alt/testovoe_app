@@ -8,8 +8,8 @@ import retrofit2.http.POST
 
 interface TestovoeApi {
     @POST("getMenu.php")
-    suspend fun getCategories() : MenuRequest
+    suspend fun getCategories() : Result<MenuRequest>
     @FormUrlEncoded
     @POST("getSubMenu.php")
-    suspend fun getSubMenu(@Field("menuID") menuID : String) : SubMenuRequest
+    suspend fun getSubMenu(@Field("menuID") menuID : String) : Result<SubMenuRequest>
 }

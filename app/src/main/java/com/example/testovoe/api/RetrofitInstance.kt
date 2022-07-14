@@ -9,6 +9,7 @@ object RetrofitInstance {
         Retrofit.Builder()
             .baseUrl("https://vkus-sovet.ru/api/")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .build()
     }
     val api : TestovoeApi by lazy {

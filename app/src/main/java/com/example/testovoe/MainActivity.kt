@@ -1,5 +1,6 @@
 package com.example.testovoe
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -25,11 +26,21 @@ class MainActivity : AppCompatActivity() {
         var menuCategory : TextView = findViewById(R.id.category_name)
         recyclerViewSubMenu = findViewById(R.id.subMenu_RV)
         recyclerViewMenu = findViewById(R.id.menu_RV)
+        viewModel.exception.observe(this){
+            if (it==1){
+                val intent = Intent(this@MainActivity, ErrorActivity::class.java)
+                startActivity(intent)
+            }
+        }
         viewModel.subMenuList.observe(this){
-            subMenuAdapter.setSubMenu(it.menuList)
+            if (it.status == "true"){
+                subMenuAdapter.setSubMenu(it.menuList)
+            }
         }
         viewModel.menuList.observe(this){
-            menuAdapter.setMenu(it)
+            if (it.status == "true"){
+                menuAdapter.setMenu(it.menuList)
+            }
         }
         recyclerViewSubMenu.adapter = subMenuAdapter
         recyclerViewMenu.adapter = menuAdapter
