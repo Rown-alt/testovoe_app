@@ -20,13 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         viewModel.getMenu()
-    }
 
-    override fun onStart() {
-        super.onStart()
         var menuCategory : TextView = findViewById(R.id.category_name)
         recyclerViewSubMenu = findViewById(R.id.subMenu_RV)
         recyclerViewMenu = findViewById(R.id.menu_RV)
@@ -45,6 +40,5 @@ class MainActivity : AppCompatActivity() {
             viewModel.getSubMenu(id)
         }
     }
-
 
 }
