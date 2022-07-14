@@ -17,6 +17,7 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.MenuAdapterViewHolder>() {
     private var menu : List<MenuList> = listOf()
     var itemName = MutableLiveData<String>()
     var itemID = MutableLiveData<String>()
+    var selectedPosition = -1
     class MenuAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view){
         private val image : ImageView = view.findViewById(R.id.menu_image)
         private val name : TextView = view.findViewById(R.id.menu_name)
@@ -27,7 +28,6 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.MenuAdapterViewHolder>() {
             Glide.with(itemView).load(imagesrc).into(image)
             name.text = menuItem.name
             subMenuCount.text = menuItem.subMenuCount + " товаров"
-            color.setImageResource(R.color.mid_gray)
         }
 
     }
@@ -42,12 +42,18 @@ class MenuAdapter : RecyclerView.Adapter<MenuAdapter.MenuAdapterViewHolder>() {
 
     override fun onBindViewHolder(holder: MenuAdapterViewHolder, position: Int) {
         holder.bind(menu[position])
+
         holder.itemView.setOnClickListener {
             itemName.value = menu[position].name.toString()
             itemID.value = menu[position].menuID.toString()
+            selectedPosition = position
+            notifyDataSetChanged()
+        }
+        if (selectedPosition == position){
+            holder.color.setImageResource(R.color.blue)
+        }
+        else{
             holder.color.setImageResource(R.color.mid_gray)
-            val color2 : RoundedImageView = it.findViewById(R.id.roundedImageView)
-            color2.setImageResource(R.color.blue)
         }
     }
 
