@@ -1,5 +1,6 @@
 package com.example.testovoe.models
 
+import com.example.testovoe.R
 import com.google.gson.annotations.SerializedName
 
 data class MenuList (
